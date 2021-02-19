@@ -6,4 +6,8 @@ https://view.commonwl.org/workflows/github.com/kyusque/abmp_log_dump2pieda/blob/
 
 ## test-extract_pieda
 
-https://view.commonwl.org/workflows/github.com/kyusque/abmp_log_dump2pieda/blob/master/test-data.cwl
+https://view.commonwl.org/workflows/github.com/kyusque/abmp_log_dump2pieda/blob/master/test-extract_pieda.cwl
+
+## test-extract_ifie
+
+https://view.commonwl.org/workflows/github.com/kyusque/abmp_log_dump2pieda/blob/master/test-extract_ifie.cwl
