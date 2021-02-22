@@ -3,7 +3,7 @@ cwlVersion: v1.0
 baseCommand: awk
 arguments:
     - >
-        !read && /##.*FRAGMENTATION/ { read = 1; next }
+        !read && /##.*FRAGMENTATION/ { read = 1; print; next }
         !read { next }
         /##/ { exit }
         { print }
