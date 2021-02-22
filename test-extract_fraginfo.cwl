@@ -3,9 +3,12 @@ class: Workflow
 cwlVersion: v1.0
 inputs: {}
 outputs:
-    ifie:
+    fraginfo:
         type: File
         outputSource: extract_fraginfo/fraginfo
+    atom2frag:
+        type: File
+        outputSource: extract_fraginfo/atom2frag
 steps:
     data:
         run: test-data2.cwl
@@ -21,6 +24,7 @@ steps:
             log: data/log
         out:
             - fraginfo
+            - atom2frag
 
 requirements:
     SubworkflowFeatureRequirement: {}

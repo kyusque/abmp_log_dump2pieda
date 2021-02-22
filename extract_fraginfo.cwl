@@ -8,6 +8,9 @@ outputs:
     fraginfo:
         type: File
         outputSource: fraginfo/fraginfo
+    atom2frag:
+        type: File
+        outputSource: atom2frag/atom2frag
 steps:
     pull_fragmentation:
         run: pull_fragmentation_info.cwl
@@ -54,4 +57,31 @@ steps:
             log: pull_fragmentation/fragmentation
         out:
             - fraginfo
+    atom2frag:
+        run:
+            class: CommandLineTool
+            cwlVersion: v1.0
+            baseCommand: awk
+            arguments:
+                - >
+                    BEGIN { OFS=","; print "atom", "frag" }
+                    !nfrag && /NUMBER OF FRAGMENTS/ { nfrag = $5; getline; getline; next } 
+                    !nfrag { next } 
+                    NF < 1 { exit } 
+                    { if (tmp = int(substr($0, 9, 5))) {f = tmp; j = 3} else j = 1;  for (i = j ; i <= NF; i++) atom[$i] = f } 
+                    END { for (i = 1; i <= length(atom); i++) print i, atom[i]; exit !nfrag }
+            stdout: atom2frag.txt
+            inputs:
+                section:
+                    type: File
+                    inputBinding:
+                        position: 1
+                    streamable: true
+            outputs:
+                atom2frag:
+                    type: stdout
+        in:
+            section: pull_fragmentation/fragmentation
+        out:
+            - atom2frag
     
