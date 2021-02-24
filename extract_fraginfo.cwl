@@ -30,7 +30,7 @@ steps:
                     !read && /Fragmentation Type/ { read = 1; getline; next } 
                     !read { next } 
                     NF < 1 { exit } 
-                    NF > 7 { print 
+                    { print 
                     substr($0, 1, 1), 
                     int(substr($0, 2, 4)), 
                     int(substr($0, 6, 7)), 
