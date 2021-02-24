@@ -33,3 +33,5 @@ steps:
             log: log
         out:
             - pieda
+requirements:
+    SubworkflowFeatureRequirement: {}
