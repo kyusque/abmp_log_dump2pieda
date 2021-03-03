@@ -4,6 +4,9 @@ cwlVersion: v1.0
 inputs: 
     pdb:
         type: File
+    ligand_charge:
+        type: string
+        default: ""
 outputs:
     fraginfo:
         type: File
@@ -22,7 +25,8 @@ steps:
             inputs: 
                 pdb:
                     type: File
-
+                ligand_charge:
+                    type: string
             outputs:
                 log:
                     type: stdout
@@ -39,6 +43,7 @@ steps:
                             FMO='ON'
                             NBody=2
                             AutoFrag='ON'
+                            LigandCharge='$(inputs.ligand_charge)'
                             FragSizeAminoacid='/amino'
                             /
                             &SCF
@@ -109,6 +114,7 @@ steps:
                             /
         in: 
             pdb: pdb
+            ligand_charge: ligand_charge
         out:
             - log
     extract_fraginfo:
@@ -117,4 +123,6 @@ steps:
             log: abinitmp/log
         out:
             - fraginfo
+requirements:
+    SubworkflowFeatureRequirement: {}
 
